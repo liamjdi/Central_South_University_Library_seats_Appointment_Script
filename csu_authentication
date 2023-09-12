@@ -1,0 +1,80 @@
+# MY MOTTO: 少时须知凌云志,曾许人间第一流.
+# By: Liam-Jdi
+# Time:5/12/2023 21:00 PM
+# QQ-Mail:3161796832@qq.com
+#说明：这个文件是因为，图书馆（包括教务系统等）加了不可信设备验证，我们需要首次登录扫码（短信验证码发送不了），有几个注意的地方，
+#这里chrome_options.add_argument(r'user-data-dir=/root/.config/google-chrome/') 是要使用浏览器的数据目录，这样就不会每次登录都还要在不可信设备验证了。
+#其次就是熟练使用  browser.get_screenshot_as_file(r"screen.png")打印当前界面来看到哪一步，
+#还有就是 #print(browser.page_source)输出网页源代码用于定位元素（改进：写到文件里，不然还要复制很麻烦）
+#可选择qq或者微信扫码验证嗷，不过一个号子绑定一个，用完及时解绑啊啊
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from datetime import datetime
+from datetime import timedelta
+from selenium.webdriver.chrome.options import Options
+import time
+import os
+import base64
+
+#图书馆登录的路径
+CSU_LIB_url = "https://ca.csu.edu.cn/authserver/login?type=userNameLogin&service=http%3A%2F%2Flibzw.csu.edu.cn%2Fcas%2Findex.php%3Fcallback%3Dhttp%3A%2F%2Flibzw.csu.edu.cn%2Fhome%2Fweb%2Ff_second"
+  
+#浏览器路径和driver路径
+binary_location = '/usr/bin/google-chrome'
+chrome_driver_binary = '/usr/local/Soft/Chrome/chromedriver'
+chrome_options = Options()
+chrome_options.binary_location = binary_location
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument('--window-size=1960,1080')
+chrome_options.add_argument(r'user-data-dir=/root/.config/google-chrome/')
+
+print("begin：")
+print(time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(int(time.time()))))
+
+
+username="xxxxxxxxxx"
+password="xxxxxxxxxx"
+
+chromedriver = chrome_driver_binary
+os.environ["webdriver.chrome.driver"] = chromedriver
+
+browser = webdriver.Chrome(executable_path='/usr/local/Soft/Chrome/chromedriver', chrome_options=chrome_options)
+browser.implicitly_wait(10)#等待十秒
+try:
+    #打开网页
+    browser.get(CSU_LIB_url)
+    input("现在是登录页面，输入任意字符继续")
+    browser.find_element(By.ID,"username").clear()
+    browser.find_element(By.ID,"username").send_keys(username)
+    browser.find_element(By.ID,"password").clear()
+    browser.find_element(By.ID,"password").send_keys(password)
+    #browser.find_element(By.ID, "rememberMe").click()
+    browser.find_element(By.ID,"login_submit").click()
+    browser.get_screenshot_as_file(r"screen.png")
+    #print(browser.current_url)
+    #input("jixu")
+    #print(browser.page_source)
+    #browser.get_screenshot_as_file(r"screen.png")
+    input("查看图片，判断是登录成功还是要验证呢")
+    browser.execute_script("reAuthByCombined('qq')")#这里需要更改为weixin/qq
+    time.sleep(1)
+    browser.get_screenshot_as_file(r"screen.png")
+    input("扫码登录")
+    
+    
+    #现在开始预约
+    #print(browser.page_source)
+    
+    input("end now?:")
+    
+    
+    print("liam end ：")
+    print(time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(int(time.time()))))
+finally:
+    browser.quit()
+
