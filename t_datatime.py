@@ -46,14 +46,6 @@ try:
     
     # 打开网页
     browser.get(CSU_LIB_url)
-
-    ###下面这一段是防止上次登录过了这次免登录了，需要退出原有登录（不选七天免登录应该不用这一段）
-    # choices = browser.find_elements(By.CLASS_NAME,"logout-btn")
-    # if len(choices) !=0:
-    #    choices[0].click()
-    #    time.sleep(1)
-    #    browser.get(CSU_LIB_url)
-
     browser.find_element(By.ID, "username").clear()
     browser.find_element(By.ID, "username").send_keys(username)
     browser.find_element(By.ID, "password").clear()
@@ -62,7 +54,7 @@ try:
 
     # 现在开始预约
     tomorrow_result = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
-    segment = str((datetime.now() - datetime(2023, 1, 1, 5, 58)).days + 1429696)  # 这里，时间间隔加1429695就是湘雅的segment（明天的）
+    segment = str((datetime.now() - datetime(2023, 1, 1, 5, 58)).days + 11111)  # 这里，时间间隔加多少自己去试一下吧，和日期以及你要预约的哪个场馆有关。
 
     
     #6：00 start
@@ -70,9 +62,9 @@ try:
     while now_second >40:
         now_second = datetime.now().second
     time.sleep(0.5)
-    
+    #这里的url也是需要你自己去试出来的
     browser.get(
-        'http://libzw.csu.edu.cn/web/seat3?area=77&segment=' + segment + '&day=' + tomorrow_result + '&startTime=07:30&endTime=22:00')  # 注意，这里的segment就是和日期有关的数
+        'http://libzw.csu.edu.cn/web/seat33333?area=77777&segment=' + segment + '&day=' + tomorrow_result + '&startTime=07:30&endTime=22:00')  # 注意，这里的segment就是和日期有关的数
 
     browser.find_element(By.CSS_SELECTOR, "li[data-data*='\"name\":\"xxxx\"']").click()  # 这里用了css选择器,第一选择
     time.sleep(0.5)
