@@ -1,4 +1,4 @@
-**其他语言版本: [English](README.md), [中文](README_zh.md).**
+**其他语言版本: [English](README_en.md), [中文](README.md).**
 
 # 中南大学图书馆座位管理系统网页版早上六点定时登录预约脚本Linux（server）python+selenium（无request）
 
