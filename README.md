@@ -325,8 +325,9 @@ $ nohup python t_apscheduler.py > zndxtsg.log 2>&1 &
 $ ps -aux | grep "t_apscheduler.py"
 ##删除任务
 $ kill -9 xxx
+```
 # 结束语
 哈哈哈，开始写代码的时候是三月份，到现在已经11月份了，这七、八个月脚本也算是逐渐稳定了下来。现在也保研了也不再需要这个系统了，这段经历也算是难能可贵。
-```
+
 
 ​
