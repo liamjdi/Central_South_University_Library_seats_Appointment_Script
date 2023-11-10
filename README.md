@@ -1,6 +1,7 @@
+**其他语言版本: [English](README.md), [中文](README_zh.md).**
+
 # 中南大学图书馆座位管理系统网页版早上六点定时登录预约脚本Linux（server）python+selenium（无request）
-这里是英文版教程：[English Version](https://github.com/FeijiangHan/CSULibrary-Appointment/edit/main/readme_en.md)
-​
+
 # 准备工作
 1. 要有一台服务器，我选的是腾讯云。
 2. 下载一个好用的ssh工具，我觉得MobaXterm挺好用的，提供了SFTP，对于修改文件很容易。
